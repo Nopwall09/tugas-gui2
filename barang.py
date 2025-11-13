@@ -9,6 +9,12 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 class barang:
+    def get_data_by_id(val1):
+        sql = "SELECT * FROM barang WHERE id = %s"
+        val = (val1,)
+        mycursor.execute(sql, val)
+        result = mycursor.fetchone()
+        return result
     def insert_data(val1, val2, val3, val4, val5):
         sql = "INSERT INTO barang (id, nama, stok, harga, kategori_nama) VALUES (%s, %s, %s, %s, %s)"
         val = (val1, val2, val3, val4, val5)

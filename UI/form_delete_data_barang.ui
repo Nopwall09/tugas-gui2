@@ -47,7 +47,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Delete data barang</string>
+     <string>Hapus barang</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -111,7 +111,7 @@
       <x>20</x>
       <y>130</y>
       <width>361</width>
-      <height>154</height>
+      <height>230</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -148,14 +148,11 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="namaLabel">
+      <widget class="QLabel" name="hargaLabel">
        <property name="text">
-        <string>Nama</string>
+        <string>Harga</string>
        </property>
       </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QWidget" name="namaWidget" native="true"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="stockLabel">
@@ -164,18 +161,19 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QWidget" name="Kategori" native="true"/>
-     </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="hargaLabel">
+      <widget class="QLabel" name="hargaLabel_2">
        <property name="text">
         <string>Harga</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QWidget" name="hargaWidget" native="true"/>
+     <item row="4" column="0">
+      <widget class="QLabel" name="kategoriLabel">
+       <property name="text">
+        <string>Kategori</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

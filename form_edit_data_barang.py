@@ -23,13 +23,24 @@ class Ui_MainWindow(object):
         data = kategori.select_data()
         # print(data)
         self.Kategori.addItems(data)
-    def UpdateDataBarang(self):
+    def CariBarang(self):
+        id = self.ID.text()
+        data = barang.get_data_by_id(id)
+        Nama=data[1]
+        Stock=data[2]
+        Harga=data[3]
+        Kategori=data[4]
+        self.Nama.setText(str(Nama))
+        self.Stock.setText(str(Stock))
+        self.Harga.setText(str(Harga))
+        self.Kategori.setCurrentText(str(Kategori))
+    def updateBarang(self):
         id = self.ID.text()
         nama = self.Nama.text()
         stock = self.Stock.text()
         harga = self.Harga.text()
         kategori_nama = self.Kategori.currentText()
-        barang.update_data(nama, stock, harga, kategori_nama,id)
+        barang.update_data(nama, stock, harga, kategori_nama, id)
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(400, 500)
@@ -107,13 +118,19 @@ class Ui_MainWindow(object):
         self.update.setObjectName("update")
         self.cari = QtWidgets.QPushButton(self.centralwidget)
         self.cari.setGeometry(QtCore.QRect(291, 143, 71, 28))
-        self.cari.setStyleSheet("#cari {\n"
-"    background-color: #0078d7; \n"
-"    color: white;           \n"
-"    border-radius: 10px;        \n"
-"    border: none;                \n"
-"    padding: 6px 15px;          \n"
-"}")
+        self.cari.setStyleSheet("""
+#cari {
+    background-color: #0078d7;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 6px 15px;
+}
+#cari:hover {
+    background-color: #005fa3;
+}
+""")
+
         self.cari.setObjectName("cari")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -123,7 +140,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.getDataKategori()
-        self.update.clicked.connect(self.UpdateDataBarang)
+        self.cari.clicked.connect(self.CariBarang)
+        self.update.clicked.connect(self.updateBarang)
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))

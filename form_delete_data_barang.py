@@ -22,6 +22,17 @@ class Ui_MainWindow(object):
     def delete_barang(self):
         id = self.ID.text()
         barang.delete_data(id)
+    def cari_data(self):
+        id = self.ID.text()
+        data = barang.get_data_by_id(id)
+        Nama=data[1]
+        Stock=data[2]
+        Harga=data[3]
+        Kategori=data[4]
+        self.namalabel.setText(str(Nama))
+        self.stockLabel.setText(str(Stock))
+        self.hargalabel.setText(str(Harga))
+        self.kategoriLabel.setText(str(Kategori))
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(400, 500)
@@ -41,10 +52,10 @@ class Ui_MainWindow(object):
         self.tambahdatabarang.setFont(font)
         self.tambahdatabarang.setAlignment(QtCore.Qt.AlignCenter)
         self.tambahdatabarang.setObjectName("tambahdatabarang")
-        self.delete_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.delete_2.setGeometry(QtCore.QRect(50, 410, 305, 28))
-        self.delete_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.delete_2.setStyleSheet("#simpan {\n"
+        self.delete = QtWidgets.QPushButton(self.centralwidget)
+        self.delete.setGeometry(QtCore.QRect(50, 410, 305, 28))
+        self.delete.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.delete.setStyleSheet("#simpan {\n"
 "    background-color: #0078d7; \n"
 "    color: white;           \n"
 "    border-radius: 10px;        \n"
@@ -56,19 +67,24 @@ class Ui_MainWindow(object):
 "    background-color: #005fa3; \n"
 "}\n"
 "")
-        self.delete_2.setObjectName("delete_2")
+        self.delete.setObjectName("delete")
         self.cari = QtWidgets.QPushButton(self.centralwidget)
         self.cari.setGeometry(QtCore.QRect(290, 134, 71, 28))
-        self.cari.setStyleSheet("#cari {\n"
-"    background-color: #0078d7; \n"
-"    color: white;           \n"
-"    border-radius: 10px;        \n"
-"    border: none;                \n"
-"    padding: 6px 15px;          \n"
-"}")
+        self.cari.setStyleSheet("""
+#cari {
+    background-color: #0078d7;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 6px 15px;
+}
+#cari:hover {
+    background-color: #005fa3; 
+}
+""")
         self.cari.setObjectName("cari")
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(20, 130, 361, 154))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(20, 130, 361, 230))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 5, 0, 0)
@@ -83,24 +99,18 @@ class Ui_MainWindow(object):
         self.ID.setMaximumSize(QtCore.QSize(200, 25))
         self.ID.setObjectName("ID")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.ID)
-        self.namaLabel = QtWidgets.QLabel(self.formLayoutWidget)
-        self.namaLabel.setObjectName("namaLabel")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.namaLabel)
-        self.namaWidget = QtWidgets.QWidget(self.formLayoutWidget)
-        self.namaWidget.setObjectName("namaWidget")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.namaWidget)
+        self.namalabel = QtWidgets.QLabel(self.formLayoutWidget)
+        self.namalabel.setObjectName("namalabel")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.namalabel)
         self.stockLabel = QtWidgets.QLabel(self.formLayoutWidget)
         self.stockLabel.setObjectName("stockLabel")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.stockLabel)
-        self.Kategori = QtWidgets.QWidget(self.formLayoutWidget)
-        self.Kategori.setObjectName("Kategori")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.Kategori)
-        self.hargaLabel = QtWidgets.QLabel(self.formLayoutWidget)
-        self.hargaLabel.setObjectName("hargaLabel")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.hargaLabel)
-        self.hargaWidget = QtWidgets.QWidget(self.formLayoutWidget)
-        self.hargaWidget.setObjectName("hargaWidget")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.hargaWidget)
+        self.hargalabel = QtWidgets.QLabel(self.formLayoutWidget)
+        self.hargalabel.setObjectName("hargalabel")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.hargalabel)
+        self.kategoriLabel = QtWidgets.QLabel(self.formLayoutWidget)
+        self.kategoriLabel.setObjectName("kategoriLabel")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.kategoriLabel)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -108,18 +118,19 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.delete_2.clicked.connect(self.delete_barang)
-
+        self.delete.clicked.connect(self.delete_barang)
+        self.cari.clicked.connect(self.cari_data)
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.tambahdatabarang.setText(_translate("MainWindow", "Delete data barang"))
-        self.delete_2.setText(_translate("MainWindow", "Delete"))
+        self.tambahdatabarang.setText(_translate("MainWindow", "Hapus barang"))
+        self.delete.setText(_translate("MainWindow", "Delete"))
         self.cari.setText(_translate("MainWindow", "Cari"))
         self.iDLabel.setText(_translate("MainWindow", "ID"))
-        self.namaLabel.setText(_translate("MainWindow", "Nama"))
+        self.namalabel.setText(_translate("MainWindow", "Nama"))
         self.stockLabel.setText(_translate("MainWindow", "Stock"))
-        self.hargaLabel.setText(_translate("MainWindow", "Harga"))
+        self.hargalabel.setText(_translate("MainWindow", "Harga"))
+        self.kategoriLabel.setText(_translate("MainWindow", "Kategori"))
 
 
 if __name__ == "__main__":

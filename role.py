@@ -8,9 +8,9 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor()
 
-class kategori:
+class role:
     def select_data():
-        sql = "SELECT kategori FROM kategori"
+        sql = "SELECT role FROM role"
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
         data = []
