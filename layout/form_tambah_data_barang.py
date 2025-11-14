@@ -12,12 +12,12 @@ from kategori import kategori
 from barang import barang
 from PyQt5 import QtCore, QtGui, QtWidgets
 import mysql.connector
-mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",  
-    database="my_oop_database"
-)
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="root",
+#     password="",  
+#     database="my_oop_database"
+# )
 # def getDataKategori(self):
 #     data=kategori.select_data()
 #     print(data)w
